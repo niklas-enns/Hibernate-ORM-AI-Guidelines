@@ -37,3 +37,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+### IDE settings (kept out of the repo) ###
+.idea/
