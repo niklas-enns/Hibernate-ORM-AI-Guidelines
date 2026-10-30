@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: catalog-page-rendering
+expected_outcome: |
+  A page of categories with their products is loaded with a constant number of statements, usable after the session is closed, without EAGER mappings or open-session workarounds; addProduct sets the owning side.
+context:
+  scaffold_script: place-files.sh

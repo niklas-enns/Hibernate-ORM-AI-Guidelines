@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: product-edit-form
+expected_outcome: |
+  Updates name and price without touching other fields, does not create products for unknown ids, and Product gets optimistic locking.
+context:
+  scaffold_script: place-files.sh

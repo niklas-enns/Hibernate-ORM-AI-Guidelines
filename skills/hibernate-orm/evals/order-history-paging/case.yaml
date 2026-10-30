@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: order-history-paging
+expected_outcome: |
+  Order history is served by a constant number of SQL statements (no N+1), Customer does not map its unbounded orders as a collection, and to-one associations are LAZY.
+context:
+  scaffold_script: place-files.sh

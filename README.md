@@ -43,6 +43,15 @@ python3 skills/hibernate-orm/scripts/check_entities.py src/main/java          # 
 python3 skills/hibernate-orm/scripts/check_entities.py --strict src/main/java # also fail on warnings (CI)
 ```
 
+**Checker in your CI.** It catches mistakes no matter who or which model wrote the code, at no token cost.
+It needs only Python 3.9+, no dependencies. GitHub Actions example, with the skill committed under
+`.claude/skills/hibernate-orm`:
+```yaml
+- name: Hibernate mapping checks
+  run: python3 .claude/skills/hibernate-orm/scripts/check_entities.py --strict src/main/java
+```
+Start without `--strict` (fail on errors only) if existing code has many warnings, and tighten later.
+
 ## Verifying the guidelines
 
 ```bash
@@ -79,13 +88,31 @@ checks the behavior expected for the version on the classpath.
 | Q5 filtered fetch | `QueryingTest`: `filteringFetchedCollectionCorruptsState`, `filterWithSeparateJoin` |
 | S1 dirty checking | `SessionLifecycleTest#dirtyCheckingWritesChanges` |
 | S2 merge | `SessionLifecycleTest#mergeReturnsManagedCopy` |
-| S5 batch processing | `SessionLifecycleTest`: `regularSessionKeepsEveryEntity`, `flushAndClearBoundsMemory`, `statelessSessionForBulkInsert` |
+| S5 batch processing | `SessionLifecycleTest`: `regularSessionKeepsEveryEntity`, `flushAndClearBoundsMemory`, `statelessSessionForBulkInsert`, `statelessSessionBatchSize` |
 | C1 optimistic locking | `SessionLifecycleTest#optimisticLockingRejectsStaleMerge` |
 
 Not covered by tests: M1, M2, Q2, S3, S4 (taken from the Hibernate documentation and API; the removed
 APIs in S3 were checked against the Hibernate 7.4.14 `Session` interface).
 
 Limitations: tests run on H2 only. Behavior that depends on the database (SQL shape, locking, sequences) can differ.
+
+## Does the skill help agents?
+
+`skills/hibernate-orm/evals/` holds 5 coding tasks (skill-creator format). Each run gets a copy of
+`eval-harness/starter`. `eval-harness/grade.py` grades the result with hidden tests (`eval-harness/hidden-tests`):
+correctness, SQL statement counts, mapping checks.
+
+Results of the first evaluation (1 run per configuration, so indicative only):
+
+| | Opus with skill | Opus without | Haiku with skill | Haiku without |
+|---|---|---|---|---|
+| Checks passed | 25/25 | 24/25 | 25/25 | 23/25 |
+| Tokens per task | 52k | 39k | 56k | 46k |
+
+Without the skill, both models already handled N+1, aggregates, bulk import and partial updates correctly. The
+skill made the difference on the house rules (`@Version`, `equals`/`hashCode`) and prevented Haiku from leaving
+three `@ManyToOne` associations EAGER. `SKILL.md` was then condensed to an entity checklist, house rules and
+Hibernate 7 specifics.
 
 ### A finding from writing the tests
 

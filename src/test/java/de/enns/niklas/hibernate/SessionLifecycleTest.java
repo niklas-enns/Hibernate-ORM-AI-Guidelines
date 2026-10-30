@@ -95,6 +95,26 @@ class SessionLifecycleTest extends HibernateTestBase {
     }
 
     @Test
+    @DisplayName("S5: setJdbcBatchSize on a StatelessSession batches inserts without global configuration")
+    void statelessSessionBatchSize() {
+        long unbatched = statementsDuring(() -> sessionFactory.inStatelessTransaction(session -> {
+            for (int i = 0; i < 1_000; i++) {
+                session.insert(new Publisher("Unbatched " + i, new Address("Street", "City", "DE")));
+            }
+        }));
+        long batched = statementsDuring(() -> sessionFactory.inStatelessTransaction(session -> {
+            session.setJdbcBatchSize(50);
+            for (int i = 0; i < 1_000; i++) {
+                session.insert(new Publisher("Batched " + i, new Address("Street", "City", "DE")));
+            }
+        }));
+
+        // 1,000 inserts + 20 sequence calls (allocation size 50) without batching
+        assertThat(unbatched).isGreaterThanOrEqualTo(1_000);
+        assertThat(batched).isLessThan(unbatched / 10);
+    }
+
+    @Test
     @DisplayName("C1: @Version rejects merging a stale detached entity")
     void optimisticLockingRejectsStaleMerge() {
         var author = new Author("Martha Wells");

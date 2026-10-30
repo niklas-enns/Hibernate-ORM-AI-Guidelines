@@ -39,3 +39,6 @@ build/
 .DS_Store
 ### IDE settings (kept out of the repo) ###
 .idea/
+
+### Skill evaluation runs ###
+skills/hibernate-orm-workspace/

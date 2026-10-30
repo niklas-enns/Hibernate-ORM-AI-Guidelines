@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: bulk-product-import
+expected_outcome: |
+  Imports all rows correctly and keeps memory bounded (StatelessSession or periodic flush/clear), finishing 50,000 rows quickly.
+context:
+  scaffold_script: place-files.sh

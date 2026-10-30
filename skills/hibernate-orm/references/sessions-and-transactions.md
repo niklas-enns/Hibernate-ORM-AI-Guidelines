@@ -128,6 +128,10 @@ sessionFactory.inStatelessTransaction(session -> {
 Use `insert`, `update`, `delete`, `upsert`; associations are fetched explicitly with `session.fetch(...)` or
 `join fetch`.
 
+If the application doesn't set `hibernate.jdbc.batch_size`, enable batching for just this session with
+`session.setJdbcBatchSize(50)`. 1,000 inserts then need less than a tenth of the statements
+(`SessionLifecycleTest#statelessSessionBatchSize`).
+
 **Regular session with flush/clear**, when you need cascades or callbacks:
 ```java
 // hibernate.jdbc.batch_size=50, hibernate.order_inserts=true, hibernate.order_updates=true
