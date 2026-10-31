@@ -4,6 +4,9 @@ Guidelines that teach AI coding agents how to write correct, efficient **Hiberna
 code. Each rule tagged ✅ is backed by a test that runs against a real Hibernate version, so the guidelines can't
 quietly drift into outdated Hibernate 5 folklore.
 
+This is an independent community project. It is not affiliated with, sponsored or endorsed by the Hibernate
+project. Hibernate is a trademark of its respective owner.
+
 ## What's in here
 
 ```
