@@ -1,4 +1,4 @@
-# Hibernate AI Guidelines
+# Hibernate ORM AI Guidelines
 
 Guidelines that teach AI coding agents how to write correct, efficient **Hibernate ORM 7 / Jakarta Persistence 3.2**
 code. Each rule tagged ✅ is backed by a test that runs against a real Hibernate version, so the guidelines can't

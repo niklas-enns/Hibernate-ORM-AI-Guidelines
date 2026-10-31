@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.enns.niklas</groupId>
-    <artifactId>Hibernate-AI-Guidelines</artifactId>
+    <artifactId>Hibernate-ORM-AI-Guidelines</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
