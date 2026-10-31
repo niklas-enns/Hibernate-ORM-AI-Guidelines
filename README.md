@@ -1,11 +1,20 @@
 # Hibernate ORM AI Guidelines
 
+[![CI](https://github.com/niklas-enns/Hibernate-ORM-AI-Guidelines/actions/workflows/ci.yml/badge.svg)](https://github.com/niklas-enns/Hibernate-ORM-AI-Guidelines/actions/workflows/ci.yml)
+
 Guidelines that teach AI coding agents how to write correct, efficient **Hibernate ORM 7 / Jakarta Persistence 3.2**
 code. Each rule tagged ✅ is backed by a test that runs against a real Hibernate version, so the guidelines can't
 quietly drift into outdated Hibernate 5 folklore.
 
 This is an independent community project. It is not affiliated with, sponsored or endorsed by the Hibernate
 project. Hibernate is a trademark of its respective owner.
+
+**Quick start (Claude Code):**
+```
+/plugin install hibernate-orm --marketplace niklas-enns/Hibernate-ORM-AI-Guidelines
+```
+On Claude Code before 2.1.275, run `/plugin marketplace add niklas-enns/Hibernate-ORM-AI-Guidelines`, then
+`/plugin install hibernate-orm@hibernate-orm-ai-guidelines`. Other tools: see [Using it](#using-it).
 
 ## What's in here
 
@@ -22,6 +31,8 @@ skills/hibernate-orm/              Agent Skill (Claude Code, Claude API, and oth
 │   └── anti-patterns.md           review checklist
 └── scripts/check_entities.py      static checker for common mistakes (Python 3.9+, no dependencies)
 
+.claude-plugin/                    Claude Code plugin + marketplace manifests
+
 agents-md/AGENTS.md                condensed rules for tools that read AGENTS.md (generated from SKILL.md)
 
 src/main/java/.../model/           reference model that follows every rule (Author, Book, Publisher, ...)
@@ -31,7 +42,10 @@ tools/build_agents_md.py           regenerates agents-md/AGENTS.md
 
 ## Using it
 
-**As an Agent Skill.** Copy `skills/hibernate-orm` to either
+**As a Claude Code plugin.** See the quick start above. The skill then runs as `/hibernate-orm:hibernate-orm`
+and also loads automatically.
+
+**As an Agent Skill** (Claude Code without the plugin, or other tools). Copy `skills/hibernate-orm` to either
 - `~/.claude/skills/hibernate-orm` (all your projects), or
 - `<project>/.claude/skills/hibernate-orm` (one project, shared with the team via git).
 

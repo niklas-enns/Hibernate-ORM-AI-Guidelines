@@ -1,0 +1,14 @@
+{
+  "name": "hibernate-orm-ai-guidelines",
+  "description": "Hibernate ORM 7 guidelines for AI coding agents",
+  "owner": {
+    "name": "Niklas Enns"
+  },
+  "plugins": [
+    {
+      "name": "hibernate-orm",
+      "source": "./",
+      "description": "Tested rules for Hibernate ORM 7 / Jakarta Persistence 3.2 code, plus a static checker for entity mappings"
+    }
+  ]
+}

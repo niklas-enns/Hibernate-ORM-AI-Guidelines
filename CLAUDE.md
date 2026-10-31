@@ -25,3 +25,9 @@ tools/test-hibernate-versions.sh
 python3 skills/hibernate-orm/scripts/check_entities.py --strict src/main
 python3 tools/build_agents_md.py --check
 ```
+
+## Releases
+
+The repo is also a Claude Code plugin marketplace (`.claude-plugin/`). Plugin users only receive changes when
+`version` in `.claude-plugin/plugin.json` changes: bump it with every release and tag the commit `v<version>`.
+Check with `claude plugin validate .` (the CLAUDE.md warning is expected: this file is for contributors).

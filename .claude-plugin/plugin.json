@@ -1,0 +1,13 @@
+{
+  "name": "hibernate-orm",
+  "displayName": "Hibernate ORM Guidelines",
+  "version": "1.0.0",
+  "description": "Tested rules for Hibernate ORM 7 / Jakarta Persistence 3.2 code, plus a static checker for entity mappings",
+  "author": {
+    "name": "Niklas Enns"
+  },
+  "homepage": "https://github.com/niklas-enns/Hibernate-ORM-AI-Guidelines",
+  "repository": "https://github.com/niklas-enns/Hibernate-ORM-AI-Guidelines",
+  "license": "MIT",
+  "keywords": ["hibernate", "jpa", "java", "orm"]
+}
