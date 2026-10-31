@@ -112,7 +112,15 @@ Results of the first evaluation (1 run per configuration, so indicative only):
 Without the skill, both models already handled N+1, aggregates, bulk import and partial updates correctly. The
 skill made the difference on the house rules (`@Version`, `equals`/`hashCode`) and prevented Haiku from leaving
 three `@ManyToOne` associations EAGER. `SKILL.md` was then condensed to an entity checklist, house rules and
-Hibernate 7 specifics.
+Hibernate 7 specifics (v2), and measured again against the same baselines:
+
+| | Opus v1 | Opus v2 | Haiku v1 | Haiku v2 |
+|---|---|---|---|---|
+| Checks passed | 25/25 | 25/25 | 25/25 | 25/25 |
+| Token overhead vs. no skill | +13.4k | **+6.5k** | +10.4k | **+9.2k** |
+| Files with `@Version` / `equals`+`hashCode` | 5 / 5 | 6 / 6 | 1 / 1 | **4 / 5** |
+
+The checklist at the top of v2 is what made Haiku apply the house rules.
 
 ### A finding from writing the tests
 
@@ -120,3 +128,7 @@ The widespread rule "never combine pagination with a collection `join fetch`" is
 Hibernate now pages the root entities in a derived table and returns complete collections in a single statement.
 Up to 7.3.x it still loads all rows and pages in memory; the cross-version run pins the change to 7.4.0. The
 guidelines keep `fail_on_pagination_over_collection_fetch=true` as a safeguard (F4).
+
+## License
+
+MIT, see [LICENSE](LICENSE).
